@@ -1,0 +1,137 @@
+:root {
+  --ink: #14213d;          /* sidebar background */
+  --ink-soft: #c9d3ea;     /* sidebar secondary text */
+  --paper: #f2f4f8;        /* main background */
+  --text: #1b2236;
+  --muted: #5b6479;
+  --teal: #0f8b8d;         /* domestic */
+  --indigo: #4a54c9;       /* international */
+  --amber: #e29a00;        /* sports */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: "Figtree", system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.page {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  min-height: 100vh;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  background: var(--ink);
+  color: #fff;
+  padding: 2.5rem 1.75rem;
+}
+
+.avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: grid;
+  place-items: center;
+  background: #2a3a63;
+  color: var(--ink-soft);
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.name {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+.role {
+  color: var(--ink-soft);
+  margin-bottom: 2rem;
+}
+
+.sidebar section { margin-bottom: 1.75rem; }
+
+.sidebar h3 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.1rem;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #34456f;
+}
+
+.sidebar ul { list-style: none; }
+
+.sidebar li strong { display: block; }
+.sidebar li span { color: var(--ink-soft); font-size: 0.92rem; }
+
+.skills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.skills li {
+  background: #22335c;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+}
+
+/* ---------- Main ---------- */
+.main {
+  padding: 3rem clamp(1.25rem, 4vw, 3.5rem);
+  max-width: 1100px;
+}
+
+.date { color: var(--muted); margin-bottom: 0.25rem; }
+
+h1 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.1;
+  margin-bottom: 2.75rem;
+}
+
+.section-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.news {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 6px;
+  padding: 1.25rem 1.25rem 1.1rem;
+  border-top: 5px solid var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.card h3 { font-size: 0.95rem; color: var(--muted); font-weight: 600; }
+.card .headline { font-size: 1.05rem; font-weight: 500; flex: 1; }
+.card .source { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+
+.domestic      { border-top-color: var(--teal); }
+.international { border-top-color: var(--indigo); }
+.sports        { border-top-color: var(--amber); }
+
+a:focus-visible { outline: 3px solid var(--indigo); outline-offset: 3px; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 900px) {
+  .page { grid-template-columns: 1fr; }
+  .news { grid-template-columns: 1fr; }
+  .sidebar { padding: 2rem 1.5rem; }
+}
