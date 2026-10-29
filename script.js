@@ -1,4 +1,4 @@
-// ---------- Greeting ----------
+// ---------- Greeting (uses the visitor's device time) ----------
 function getGreeting(hour) {
   if (hour >= 5 && hour < 12) return "Good morning";
   if (hour >= 12 && hour < 17) return "Good afternoon";
@@ -15,9 +15,7 @@ document.getElementById("date").textContent = now.toLocaleDateString("en-IN", {
   year: "numeric",
 });
 
-// ---------- News ----------
-const NEWS_URL = "http://localhost:5678/webhook/news";
-
+// ---------- News (read from news.json, saved by n8n) ----------
 function fillCard(key, item) {
   const card = document.getElementById("news-" + key);
   card.querySelector(".headline").textContent = item.title;
@@ -25,6 +23,11 @@ function fillCard(key, item) {
   link.href = item.link;
   link.target = "_blank";
   link.rel = "noopener";
+  try {
+    link.textContent = "Read on " + new URL(item.link).hostname.replace("www.", "");
+  } catch (e) {
+    link.textContent = "Read more";
+  }
 }
 
 function showError(message) {
@@ -35,7 +38,7 @@ function showError(message) {
 
 async function loadNews() {
   try {
-    const response = await fetch(NEWS_URL);
+    const response = await fetch("news.json?v=" + Date.now());
     if (!response.ok) throw new Error("HTTP " + response.status);
     const data = await response.json();
     fillCard("domestic", data.domestic);
@@ -43,7 +46,7 @@ async function loadNews() {
     fillCard("sports", data.sports);
   } catch (error) {
     console.error("News error:", error);
-    showError("Could not load news: " + error.message);
+    showError("Headlines are unavailable right now.");
   }
 }
 
